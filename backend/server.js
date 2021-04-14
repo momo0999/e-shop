@@ -3,11 +3,11 @@ const products = require('./data/products');
 
 const app = express();
 
-app.get('/shop', (req, res) => {
+app.get('/api/products', (req, res) => {
   res.json(products);
 });
 
-app.get('/shop/product/:id', (req, res) => {
+app.get('/api/product/:id', (req, res) => {
   const product = products.find((p) => p._id === req.params.id);
   res.json(product);
 });
