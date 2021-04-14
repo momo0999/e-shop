@@ -7,7 +7,12 @@ const Product = require('../models/productModel');
 
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({});
-  res.json(products);
+  if (products) {
+    res.json(products);
+  } else {
+    res.status(404);
+    throw new Error('No products found');
+  }
 });
 
 module.exports = { getProducts };

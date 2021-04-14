@@ -1,4 +1,5 @@
 const express = require('express');
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const dotenv = require('dotenv');
 const colors = require('colors');
 const connectDB = require('./config/db');
@@ -29,3 +30,6 @@ const startServer = () => {
 
 const PORT = process.env.PORT || 5000;
 startServer();
+
+app.use(notFound);
+app.use(errorHandler);
