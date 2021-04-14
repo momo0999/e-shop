@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Col, Row } from 'react-bootstrap';
 import Product from '../components/Product';
-import products from '../products';
 
 const ShopScreen = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get('/api/products');
+      setProducts(data);
+    };
+    fetchProducts();
+  }, []);
+
+  if (!products) {
+    return;
+  }
   return (
     <React.Fragment>
       <h1>LATEST PRODUCTS</h1>
