@@ -15,4 +15,13 @@ const getProducts = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getProducts };
+const getProductById = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.json(product);
+  } else {
+    throw new Error('Product not found');
+  }
+});
+
+module.exports = { getProducts, getProductById };
