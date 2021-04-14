@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Battlecreek Mug',
     image:
       'https://images.unsplash.com/photo-1617902206819-ec9955c8fa44?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
@@ -14,7 +13,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'Tree Mug',
     image:
       'https://images.unsplash.com/photo-1542556398-b665428620ae?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=926&q=80',
@@ -28,7 +26,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Old White Blank Mug',
     image:
       'https://images.unsplash.com/photo-1495100497150-fe209c585f50?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80',
@@ -42,7 +39,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: 'White Mug',
     image:
       'https://images.unsplash.com/photo-1507290243274-299e646b93da?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
@@ -56,7 +52,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Black Whisky Mug',
     image:
       'https://images.unsplash.com/photo-1501708881774-9e6edfc73b8a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=880&q=80',
@@ -70,7 +65,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Flamingo Mug',
     image:
       'https://images.unsplash.com/photo-1516317518460-4deaeea07922?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
