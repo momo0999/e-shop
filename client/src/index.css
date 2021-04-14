@@ -5,5 +5,35 @@
 }
 
 main {
-  min-height: 80vh;
+  min-height: 100vh;
+}
+
+footer {
+  background-color: #78c2ad;
+  color: #fff;
+}
+
+span {
+  margin: 2px;
+}
+
+h3 {
+  margin: 5px;
+}
+
+.product__img {
+  height: 250px;
+  min-width: 200px;
+  object-fit: cover;
+}
+
+.product {
+  transition: transform 0.1s ease-in;
+}
+.product:hover {
+  transform: scale(1.07);
+}
+
+.rating {
+  margin: 5px;
 }
