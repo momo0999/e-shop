@@ -1,11 +1,19 @@
 import React from 'react';
-import './App.css';
+import { Container } from 'react-bootstrap';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 function App() {
   return (
-    <div className='App'>
-      <h1>Hii from the App</h1>
-    </div>
+    <React.Fragment>
+      <Header />
+      <main className='py-3'>
+        <Container>
+          <h1>Welcome To Mug Shop</h1>
+        </Container>
+      </main>
+      <Footer />
+    </React.Fragment>
   );
 }
 
