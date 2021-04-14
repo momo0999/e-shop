@@ -17,9 +17,7 @@ function App() {
           <Route path='/shop' exact>
             <ShopScreen />
           </Route>
-          <Route path='/shop/product/:id'>
-            <ProductScreen />
-          </Route>
+          <Route path='/shop/product/:id' component={ProductScreen} />
           <Route path='/' exact>
             <HomeScreen />
           </Route>
