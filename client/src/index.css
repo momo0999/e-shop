@@ -5,11 +5,11 @@
 }
 
 main {
-  min-height: 80vh;
+  min-height: 100vh;
 }
 
 footer {
-  background-color: #3a3f44;
+  background-color: #78c2ad;
   color: #fff;
 }
 
