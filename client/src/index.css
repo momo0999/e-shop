@@ -5,7 +5,7 @@
 }
 
 main {
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 footer {
@@ -36,4 +36,14 @@ h3 {
 
 .rating {
   margin: 5px;
+}
+
+.qty__dark {
+  background-color: #3a3f44;
+  color: #aaaaaa;
+}
+
+.qty__dark:focus {
+  background-color: #3a3f44;
+  color: #aaaaaa;
 }
