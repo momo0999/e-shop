@@ -29,6 +29,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      isAdmin: user.isAdmin,
     });
   } else {
     res.status(404);
@@ -36,4 +37,32 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { loginUser, getUserProfile };
+const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
+  const existUser = await User.findOne({ email });
+
+  if (existUser) {
+    res.status(400);
+    throw new Error('User already exists');
+  }
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
+
+  if (user) {
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
+module.exports = { loginUser, getUserProfile, registerUser };
