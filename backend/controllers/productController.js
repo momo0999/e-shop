@@ -7,6 +7,7 @@ const Product = require('../models/productModel');
 
 const getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({});
+
   if (products) {
     res.json(products);
   } else {
