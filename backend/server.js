@@ -5,12 +5,15 @@ const colors = require('colors');
 const connectDB = require('./config/db');
 
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 
 const app = express();
+app.use(express.json());
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 const startServer = () => {
   connectDB()
