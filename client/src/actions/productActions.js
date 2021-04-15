@@ -1,0 +1,28 @@
+import {
+  PRODUCT_LIST_FAIL,
+  PRODUCT_LIST_REQUEST,
+  PRODUCT_LIST_SUCCESS,
+} from './types';
+import axios from 'axios';
+
+export const fetchProductsList = () => async (dispatch, getState) => {
+  const {
+    productList: { products },
+  } = getState();
+  if (products.length) {
+    return;
+  }
+  try {
+    dispatch({ type: PRODUCT_LIST_REQUEST });
+    const { data } = await axios.get(`/api/products`);
+    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
