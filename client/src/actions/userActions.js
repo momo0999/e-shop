@@ -3,6 +3,7 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
 } from './types';
 
 export const loginUser = (formValues) => async (dispatch) => {
@@ -25,4 +26,9 @@ export const loginUser = (formValues) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem('userInfo');
+  dispatch({ type: USER_LOGOUT });
 };

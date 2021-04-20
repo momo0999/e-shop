@@ -11,7 +11,7 @@ const LoginScreen = ({ location, history }) => {
   const dispatch = useDispatch();
   const { userInfo, loading, error } = useSelector((state) => state.userLogin);
 
-  const redirect = location.search ? location.search.split('=')[1] : '/';
+  const redirect = location.search ? location.search.split('=')[1] : '/shop';
 
   const [formValues, setFormValues] = useState({
     email: '',
