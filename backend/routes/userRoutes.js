@@ -15,6 +15,6 @@ router.route('/').post(registerUser);
 router
   .route('/profile')
   .get(protect, getUserProfile)
-  .put(protect, updateUserProfile);
+  .patch(protect, updateUserProfile);
 
 module.exports = router;

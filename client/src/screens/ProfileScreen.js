@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, updateUserDetails } from '../actions/userActions';
 
 const ProfileScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -33,7 +33,11 @@ const ProfileScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('submit');
+    if (password !== confirmPassword) {
+      setMessage('Passwords do not match');
+    } else {
+      dispatch(updateUserDetails({ name, email, password }));
+    }
   };
 
   return (
