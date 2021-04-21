@@ -6,7 +6,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 
 import { saveShippingAddress } from '../actions/cartActions';
 
-const ShippingScreen = () => {
+const ShippingScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { shippingAddress } = useSelector((state) => state.cart);
 
@@ -25,6 +25,7 @@ const ShippingScreen = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(saveShippingAddress(formValues));
+    history.push('/payment');
   };
   return (
     <FormContainer>
