@@ -6,11 +6,13 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 
 import { getUserDetails, updateUserDetails } from '../actions/userActions';
+import { USER_UPDATE_PROFILE_RESET } from '../actions/types';
 
 const ProfileScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userLogin);
   const { user, loading, error } = useSelector((state) => state.userDetails);
+  const { success } = useSelector((state) => state.userUpdateProfile);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -22,7 +24,8 @@ const ProfileScreen = ({ history }) => {
     if (!userInfo) {
       history.push('/login');
     } else {
-      if (!user.name) {
+      if (!user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails('profile'));
       } else {
         setName(user.name);
