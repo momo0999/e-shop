@@ -8,7 +8,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 const PlaceOrderScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
 
-  //   Calculate prices
+  //   Calculations
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
