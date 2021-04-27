@@ -17,6 +17,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
   if (orderItems && orderItems.length === 0) {
     res.status(404);
     throw new Error('No orders found');
+    return;
   } else {
     const order = new Order({
       orderItems,
