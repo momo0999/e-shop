@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getOrderDetails } from '../actions/orderActions';
-import { Link } from 'react-router-dom';
+import { addPaypalScript } from '../addPaypalScript';
 
 const OrderScreen = ({ match }) => {
+  const [paypalSdkReady, setPaypalSdkReady] = useState(false);
+
   const dispatch = useDispatch();
   const { order, loading, error } = useSelector((state) => state.orderDetails);
-
+  const { success: successPay, loading: loadingPay } = useSelector(
+    (state) => state.orderPay
+  );
   //Calculations
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -21,10 +26,16 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    if (!order || order._id !== match.params.id) {
+    if (!order || successPay || order._id !== match.params.id) {
       dispatch(getOrderDetails(match.params.id));
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPaypalScript(setPaypalSdkReady);
+      } else {
+        setPaypalSdkReady(true);
+      }
     }
-  }, [dispatch, match, order]);
+  }, [dispatch, match, order, successPay]);
 
   if (!order) {
     return null;
