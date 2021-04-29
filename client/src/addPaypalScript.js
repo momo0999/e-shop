@@ -6,7 +6,7 @@ export const addPaypalScript = async (setPaypalSdkReady) => {
   script.type = 'text/javascript';
   script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
   script.async = true;
-  script.onLoad = () => {
+  script.onload = () => {
     setPaypalSdkReady(true);
   };
   document.body.appendChild(script);
