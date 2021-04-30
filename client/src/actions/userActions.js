@@ -13,6 +13,8 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_UPDATE_PROFILE_RESET,
+  USER_DETAILS_RESET,
 } from './types';
 
 export const loginUser = (formValues) => async (dispatch) => {
@@ -39,6 +41,7 @@ export const loginUser = (formValues) => async (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('userInfo');
+  dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: USER_LOGOUT });
 };
 
@@ -66,12 +69,6 @@ export const register = (formValues) => async (dispatch) => {
 };
 
 export const getUserDetails = (profile) => async (dispatch, getState) => {
-  const {
-    userDetails: { user },
-  } = getState();
-  if (user.name) {
-    return;
-  }
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
     const {
