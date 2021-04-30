@@ -13,8 +13,12 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
-  USER_UPDATE_PROFILE_RESET,
   USER_DETAILS_RESET,
+  USER_LIST_SUCCESS,
+  USER_LIST_FAIL,
+  USER_LIST_REQUEST,
+  USER_LIST_RESET,
+  ORDER_USER_LIST_RESET,
 } from './types';
 
 export const loginUser = (formValues) => async (dispatch) => {
@@ -41,8 +45,10 @@ export const loginUser = (formValues) => async (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('userInfo');
-  dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: USER_LIST_RESET });
+  dispatch({ type: ORDER_USER_LIST_RESET });
 };
 
 export const register = (formValues) => async (dispatch) => {
@@ -110,6 +116,36 @@ export const updateUserDetails = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getAllUsers = () => async (dispatch, getState) => {
+  // const {
+  //   userList: { users },
+  // } = getState();
+  // if (users) {
+  //   dispatch({ type: USER_LIST_SUCCESS, payload: users });
+  // }
+  try {
+    dispatch({ type: USER_LIST_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get('/api/users', config);
+    dispatch({ type: USER_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

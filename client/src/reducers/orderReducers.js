@@ -11,6 +11,7 @@ import {
   ORDER_PAY_SUCCESS,
   ORDER_USER_LIST_FAIL,
   ORDER_USER_LIST_REQUEST,
+  ORDER_USER_LIST_RESET,
   ORDER_USER_LIST_SUCCESS,
 } from '../actions/types';
 
@@ -82,6 +83,8 @@ export const orderUserListReducer = (state = { orders: [] }, action) => {
       return { loading: false, orders: action.payload };
     case ORDER_USER_LIST_FAIL:
       return { loading: false, error: action.payload };
+    case ORDER_USER_LIST_RESET:
+      return {};
     default:
       return state;
   }
