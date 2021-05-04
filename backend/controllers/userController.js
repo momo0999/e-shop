@@ -60,6 +60,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @route /api/users
+// @desc Post register new user
+// @access Public
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   const existUser = await User.findOne({ email });
@@ -102,10 +106,22 @@ const getAllUsers = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    await user.remove();
+    res.json({ message: 'User removed' });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
 module.exports = {
   loginUser,
   getUserProfile,
   registerUser,
   updateUserProfile,
   getAllUsers,
+  deleteUser,
 };
