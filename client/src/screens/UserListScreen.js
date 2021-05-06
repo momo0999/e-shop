@@ -5,6 +5,7 @@ import { Table, Button } from 'react-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { deleteUser, getAllUsers } from '../actions/userActions';
+import { USER_UPDATE_RESET } from '../actions/types';
 
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const UserListScreen = ({ history }) => {
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(getAllUsers());
+      dispatch({ type: USER_UPDATE_RESET });
     } else {
       history.push('/login');
     }

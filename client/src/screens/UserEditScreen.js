@@ -5,20 +5,28 @@ import { Link } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, updateUser } from '../actions/userActions';
 
-const UserEditScreen = ({ match }) => {
+const UserEditScreen = ({ match, history }) => {
   const userId = match.params.id;
 
   const dispatch = useDispatch();
 
   const { loading, error, user } = useSelector((state) => state.userDetails);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = useSelector((state) => state.userUpdate);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
+    if (successUpdate) {
+      history.push('/admin/userList');
+    }
     if (!user.name || user._id !== userId) {
       dispatch(getUserDetails(userId));
     } else {
@@ -26,10 +34,11 @@ const UserEditScreen = ({ match }) => {
       setEmail(user.email);
       setIsAdmin(user.isAdmin);
     }
-  }, [user, dispatch, userId]);
+  }, [user, dispatch, userId, successUpdate, history]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    dispatch(updateUser({ _id: userId, name, email, isAdmin }));
   };
 
   return (
@@ -39,6 +48,8 @@ const UserEditScreen = ({ match }) => {
       </Link>
       <FormContainer>
         <h1>Edit User</h1>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{error}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
