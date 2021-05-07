@@ -16,14 +16,13 @@ const { protect, admin } = require('../middleware/authMiddleware');
 router.route('/login').post(loginUser);
 router.route('/').post(registerUser).get(protect, admin, getAllUsers);
 router
+  .route('/profile')
+  .get(protect, getUserProfile)
+  .patch(protect, updateUserProfile);
+router
   .route('/:id')
   .delete(protect, admin, deleteUser)
   .get(protect, admin, getUserById)
   .put(protect, admin, updateUser);
-
-router
-  .route('/profile')
-  .get(protect, getUserProfile)
-  .patch(protect, updateUserProfile);
 
 module.exports = router;

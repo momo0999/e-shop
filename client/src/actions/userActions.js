@@ -54,7 +54,6 @@ export const logoutUser = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: USER_LIST_RESET });
-  dispatch({ type: ORDER_USER_LIST_RESET });
 };
 
 export const register = (formValues) => async (dispatch) => {
