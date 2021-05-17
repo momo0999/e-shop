@@ -19,7 +19,8 @@ export const fetchProductsList = () => async (dispatch, getState) => {
     productList: { products },
   } = getState();
   const { productDelete } = getState();
-  if (products.length && !productDelete.success) {
+  const { productCreate } = getState();
+  if (products.length && !productDelete.success && !productCreate.success) {
     return;
   }
   try {
@@ -95,7 +96,7 @@ export const createProduct = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.post(`/api/products`, config);
+    const { data } = await axios.post(`/api/products`, {}, config);
     dispatch({ type: PRODUCT_CREATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
