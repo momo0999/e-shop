@@ -30,6 +30,10 @@ const UserListScreen = ({ history }) => {
     product: createdProduct,
   } = useSelector((state) => state.productCreate);
 
+  const { success: successUpdate } = useSelector(
+    (state) => state.productUpdate
+  );
+
   const { userInfo } = useSelector((state) => state.userLogin);
 
   useEffect(() => {
@@ -51,6 +55,12 @@ const UserListScreen = ({ history }) => {
     successCreate,
     createdProduct,
   ]);
+
+  useEffect(() => {
+    if (successUpdate) {
+      dispatch(fetchProductsList());
+    }
+  }, [successUpdate]);
 
   const handleCreateProduct = () => {
     dispatch(createProduct());

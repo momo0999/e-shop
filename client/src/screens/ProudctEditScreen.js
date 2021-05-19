@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { fetchProductDetail } from '../actions/productActions';
+import { fetchProductDetail, updateProduct } from '../actions/productActions';
+import { PRODUCT_UPDATE_RESET } from '../actions/types';
 
-const ProudctEditScreen = ({ match }) => {
+const ProudctEditScreen = ({ match, history }) => {
   const productId = match.params.id;
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
@@ -23,22 +24,45 @@ const ProudctEditScreen = ({ match }) => {
     (state) => state.productDetail
   );
 
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = useSelector((state) => state.productUpdate);
+
   useEffect(() => {
-    if (!product.name || product._id !== productId) {
-      dispatch(fetchProductDetail(productId));
+    if (successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      history.push('/admin/productList');
     } else {
-      setName(product.name);
-      setPrice(product.price);
-      setImage(product.image);
-      setBrand(product.brand);
-      setCategory(product.category);
-      setCountInStock(product.countInStock);
-      setDescription(product.description);
+      if (!product.name || product._id !== productId) {
+        dispatch(fetchProductDetail(productId));
+      } else {
+        setName(product.name);
+        setPrice(product.price);
+        setImage(product.image);
+        setBrand(product.brand);
+        setCategory(product.category);
+        setCountInStock(product.countInStock);
+        setDescription(product.description);
+      }
     }
-  }, [dispatch, product, productId]);
+  }, [dispatch, product, productId, history, successUpdate]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    dispatch(
+      updateProduct({
+        _id: productId,
+        name,
+        price,
+        image,
+        brand,
+        category,
+        countInStock,
+        description,
+      })
+    );
   };
 
   return (
@@ -48,6 +72,8 @@ const ProudctEditScreen = ({ match }) => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
