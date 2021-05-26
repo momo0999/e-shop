@@ -67,7 +67,6 @@ const ProudctEditScreen = ({ match, history }) => {
       const { data } = await axios.post('/api/upload', formData, config);
 
       setImage(data);
-      console.log(image);
       setUploading(false);
     } catch (error) {
       console.error(error);
