@@ -11,10 +11,10 @@ const ShippingScreen = ({ history }) => {
   const { shippingAddress } = useSelector((state) => state.cart);
 
   const [formValues, setFormValues] = useState({
-    address: shippingAddress.address,
-    city: shippingAddress.city,
-    postalCode: shippingAddress.postalCode,
-    country: shippingAddress.country,
+    address: shippingAddress.address || '',
+    city: shippingAddress.city || '',
+    postalCode: shippingAddress.postalCode || '',
+    country: shippingAddress.country || '',
   });
   const { address, city, postalCode, country } = formValues;
 
