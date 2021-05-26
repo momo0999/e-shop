@@ -16,7 +16,7 @@ const ShopScreen = () => {
   useEffect(() => {
     dispatch(fetchProductsList());
   }, [dispatch]);
-
+  console.log(products);
   return (
     <React.Fragment>
       <h1>LATEST PRODUCTS</h1>

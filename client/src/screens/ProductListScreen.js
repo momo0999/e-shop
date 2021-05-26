@@ -60,7 +60,7 @@ const UserListScreen = ({ history }) => {
     if (successUpdate) {
       dispatch(fetchProductsList());
     }
-  }, [successUpdate]);
+  }, [successUpdate, dispatch]);
 
   const handleCreateProduct = () => {
     dispatch(createProduct());
