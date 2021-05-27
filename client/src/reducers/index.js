@@ -22,6 +22,7 @@ import {
   orderPayReducer,
   orderUserListReducer,
   orderListReducer,
+  orderDeliverReducer,
 } from './orderReducers';
 
 export default combineReducers({
@@ -43,4 +44,5 @@ export default combineReducers({
   orderPay: orderPayReducer,
   orderUserList: orderUserListReducer,
   orderList: orderListReducer,
+  orderDeliver: orderDeliverReducer,
 });

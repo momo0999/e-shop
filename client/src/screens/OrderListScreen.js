@@ -13,6 +13,9 @@ const OrderListScreen = ({ history }) => {
   const { userInfo } = useSelector((state) => state.userLogin);
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    }
     if (userInfo && userInfo.isAdmin) {
       dispatch(getOrderList());
     } else {
@@ -63,7 +66,7 @@ const OrderListScreen = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/admin/order/${order._id}/edit`}>
+                  <LinkContainer to={`/order/${order._id}`}>
                     <Button variant='light' className='btn-sm'>
                       Details
                     </Button>
