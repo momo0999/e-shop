@@ -70,6 +70,23 @@ const updateOrderToPay = asyncHandler(async (req, res) => {
   }
 });
 
+// @route /api/orders/:id/deliver
+// @desc update order to deliver
+// @access Private
+
+const updateOrderToDeliver = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error('No order found');
+  }
+});
+
 // @route /api/orders/myorders
 // @desc Get my orders
 // @access Private
@@ -87,11 +104,16 @@ const getMyOrders = asyncHandler(async (req, res) => {
   }
 });
 
+// @route /api/orders
+// @desc Get all orders admin
+// @access Private
+
 const getOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({}).populate('user', 'id name');
   if (orders) {
     res.json(orders);
   } else {
+    res.status(404);
     throw new Error('No orders found');
   }
 });
@@ -102,4 +124,5 @@ module.exports = {
   updateOrderToPay,
   getMyOrders,
   getOrders,
+  updateOrderToDeliver,
 };
