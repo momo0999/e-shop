@@ -13,7 +13,7 @@ import {
 } from '../actions/orderActions';
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../actions/types';
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
 
   const [paypalSdkReady, setPaypalSdkReady] = useState(false);
@@ -37,13 +37,16 @@ const OrderScreen = ({ match }) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
 
-  if (!loading) {
+  if (!loading && order) {
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     );
   }
 
   useEffect(() => {
+    if (!userInfo) {
+      history.push('/login');
+    }
     if (!order || successPay || order._id !== orderId || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
@@ -55,7 +58,16 @@ const OrderScreen = ({ match }) => {
         setPaypalSdkReady(true);
       }
     }
-  }, [dispatch, match, order, successPay, orderId, successDeliver]);
+  }, [
+    dispatch,
+    match,
+    history,
+    order,
+    successPay,
+    orderId,
+    successDeliver,
+    userInfo,
+  ]);
 
   const handleOnSuccess = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
