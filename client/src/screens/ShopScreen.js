@@ -7,6 +7,7 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
+import ProductCarousel from '../components/ProductCarousel';
 
 const ShopScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -22,6 +23,7 @@ const ShopScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
   return (
     <React.Fragment>
+      {!keyword && <ProductCarousel />}
       <h1>LATEST PRODUCTS</h1>
       {loading ? (
         <Loader />
