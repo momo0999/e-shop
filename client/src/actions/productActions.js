@@ -1,6 +1,9 @@
 import {
   PRODUCT_CREATE_FAIL,
   PRODUCT_CREATE_REQUEST,
+  PRODUCT_CREATE_REVIEW_FAIL,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_DELETE_FAIL,
   PRODUCT_DELETE_REQUEST,
@@ -51,8 +54,11 @@ export const fetchProductDetail = (id) => async (dispatch, getState) => {
   const {
     productList: { products },
   } = getState();
+  const {
+    productCreateReview: { success: successReview },
+  } = getState();
   const product = products.find((_product) => _product._id === id);
-  if (product) {
+  if (product && !successReview) {
     return dispatch({ type: PRODUCT_DETAIL_SUCCESS, payload: product });
   }
   try {
@@ -146,3 +152,33 @@ export const updateProduct = (updatedProduct) => async (dispatch, getState) => {
     });
   }
 };
+
+export const createProductReview =
+  (productId, review) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: PRODUCT_CREATE_REVIEW_REQUEST });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        'Content-Type': 'application/json',
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.post(
+        `/api/products/${productId}/reviews`,
+        review,
+        config
+      );
+      dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_CREATE_REVIEW_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
