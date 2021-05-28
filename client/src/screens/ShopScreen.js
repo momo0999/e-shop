@@ -6,17 +6,20 @@ import { Col, Row } from 'react-bootstrap';
 import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Paginate from '../components/Paginate';
 
 const ShopScreen = ({ match }) => {
   const keyword = match.params.keyword;
+  const pageNumber = match.params.pageNumber || 1;
+
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector(
+  const { products, pages, page, loading, error } = useSelector(
     (state) => state.productList
   );
 
   useEffect(() => {
-    dispatch(fetchProductsList(keyword));
-  }, [dispatch, keyword]);
+    dispatch(fetchProductsList(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
   return (
     <React.Fragment>
       <h1>LATEST PRODUCTS</h1>
@@ -35,6 +38,7 @@ const ShopScreen = ({ match }) => {
           })}
         </Row>
       )}
+      <Paginate page={page} pages={pages} keyword={keyword ? keyword : ''} />
     </React.Fragment>
   );
 };

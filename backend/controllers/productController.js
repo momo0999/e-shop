@@ -6,6 +6,8 @@ const Product = require('../models/productModel');
 // @access public
 
 const getProducts = asyncHandler(async (req, res) => {
+  const pageSize = 2;
+  const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword
     ? {
         name: {
@@ -14,10 +16,14 @@ const getProducts = asyncHandler(async (req, res) => {
         },
       }
     : {};
-  const products = await Product.find({ ...keyword });
+
+  const count = await Product.countDocuments({ ...keyword });
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
 
   if (products) {
-    res.json(products);
+    res.json({ products, page, pages: Math.ceil(count / pageSize) });
   } else {
     res.status(404);
     throw new Error('No products found');
