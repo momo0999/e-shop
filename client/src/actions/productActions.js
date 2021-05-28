@@ -20,35 +20,55 @@ import {
 } from './types';
 import axios from 'axios';
 
-export const fetchProductsList = () => async (dispatch, getState) => {
-  const {
-    productList: { products },
-  } = getState();
-  const { productDelete } = getState();
-  const { productCreate } = getState();
-  const { productUpdate } = getState();
-  if (
-    products.length &&
-    !productDelete.success &&
-    !productCreate.success &&
-    !productUpdate.success
-  ) {
-    return;
-  }
-  try {
-    dispatch({ type: PRODUCT_LIST_REQUEST });
-    const { data } = await axios.get(`/api/products`);
-    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: PRODUCT_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+export const fetchProductsList =
+  (keyword = '') =>
+  async (dispatch, getState) => {
+    const {
+      productList: { products },
+    } = getState();
+    const { productDelete } = getState();
+    const { productCreate } = getState();
+    const { productUpdate } = getState();
+    if (
+      products.length &&
+      !productDelete.success &&
+      !productCreate.success &&
+      !productUpdate.success
+    ) {
+      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: products });
+    }
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST });
+      const { data } = await axios.get(`/api/products?keyword=${keyword}`);
+      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+export const searchProducts =
+  (keyword = '') =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({ type: PRODUCT_LIST_REQUEST });
+      const { data } = await axios.get(`/api/products?keyword=${keyword}`);
+      dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const fetchProductDetail = (id) => async (dispatch, getState) => {
   const {
