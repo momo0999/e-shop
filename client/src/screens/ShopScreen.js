@@ -7,15 +7,16 @@ import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-const ShopScreen = () => {
+const ShopScreen = ({ match }) => {
+  const keyword = match.params.keyword;
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector(
     (state) => state.productList
   );
 
   useEffect(() => {
-    dispatch(fetchProductsList());
-  }, [dispatch]);
+    dispatch(fetchProductsList(keyword));
+  }, [dispatch, keyword]);
   return (
     <React.Fragment>
       <h1>LATEST PRODUCTS</h1>
