@@ -10,11 +10,14 @@ import {
   createProduct,
 } from '../actions/productActions';
 import { PRODUCT_CREATE_RESET } from '../actions/types';
+import Paginate from '../components/Paginate';
 
-const UserListScreen = ({ history }) => {
+const UserListScreen = ({ history, match }) => {
+  const pageNumber = match.params.pageNumber || 1;
+
   const dispatch = useDispatch();
 
-  const { products, loading, error } = useSelector(
+  const { products, page, pages, loading, error } = useSelector(
     (state) => state.productList
   );
   const {
@@ -45,7 +48,7 @@ const UserListScreen = ({ history }) => {
       history.push(`/admin/product/${createdProduct._id}/edit`);
       dispatch({ type: PRODUCT_CREATE_RESET });
     } else {
-      dispatch(fetchProductsList());
+      dispatch(fetchProductsList('', pageNumber));
     }
   }, [
     userInfo,
@@ -54,6 +57,7 @@ const UserListScreen = ({ history }) => {
     successDelete,
     successCreate,
     createdProduct,
+    pageNumber,
   ]);
 
   useEffect(() => {
@@ -129,6 +133,7 @@ const UserListScreen = ({ history }) => {
           </tbody>
         </Table>
       )}
+      <Paginate page={page} pages={pages} isAdmin={true} />
     </React.Fragment>
   );
 };
