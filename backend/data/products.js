@@ -77,6 +77,58 @@ const products = [
     rating: 4,
     numReviews: 12,
   },
+  {
+    name: 'White Coffee Mug',
+    image:
+      'https://images.unsplash.com/photo-1512441294539-d74b41132524?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+    description:
+      'boris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa ',
+    brand: 'MugMug',
+    category: 'mugs',
+    price: 10.99,
+    countInStock: 7,
+    rating: 5,
+    numReviews: 0,
+  },
+  {
+    name: 'White Long Coffee Mug',
+    image:
+      'https://images.unsplash.com/photo-1516390118834-21602d501886?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=807&q=80',
+    description:
+      'boris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa ',
+    brand: 'MugMug',
+    category: 'mugs',
+    price: 15.99,
+    countInStock: 10,
+    rating: 3.5,
+    numReviews: 3,
+  },
+  {
+    name: 'Coffee Begin Mug',
+    image:
+      'https://images.unsplash.com/photo-1504888527749-e68244b4d3d7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+    description:
+      'boris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa ',
+    brand: 'MugMug',
+    category: 'mugs',
+    price: 16,
+    countInStock: 4,
+    rating: 4.5,
+    numReviews: 3,
+  },
+  {
+    name: 'Grey Coffee Mug',
+    image:
+      'https://images.unsplash.com/photo-1577819671984-124b026a81ed?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80',
+    description:
+      'boris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa ',
+    brand: 'MugMug',
+    category: 'mugs',
+    price: 7.99,
+    countInStock: 5,
+    rating: 4,
+    numReviews: 4,
+  },
 ];
 
 module.exports = products;
