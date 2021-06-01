@@ -21,6 +21,10 @@ h3 {
   margin: 5px;
 }
 
+.section {
+  height: 70vh;
+}
+
 .product__img {
   height: 250px;
   min-width: 200px;
@@ -94,4 +98,52 @@ h3 {
 .carousel__homeScreen p {
   font-size: 30px;
   opacity: 0.8;
+}
+
+.flex__row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 30px;
+}
+
+.flex__row-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 270px;
+  text-align: center;
+}
+
+.flex__row-col h4 {
+  margin: 10px;
+}
+
+.fas {
+  color: #fff;
+}
+
+.contact-us {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 50vh;
+}
+
+.contact-us p {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.contact-us h1 {
+  font-size: 60px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.btn-contact {
+  padding: 25px 40px;
 }
