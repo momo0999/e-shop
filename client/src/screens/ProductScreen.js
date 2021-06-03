@@ -19,6 +19,7 @@ import { PRODUCT_CREATE_REVIEW_RESET } from '../actions/types';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import MetaHelmet from '../components/MetaHelmet';
 
 const ProductScreen = ({ match, history }) => {
   const productId = match.params.id;
@@ -74,6 +75,7 @@ const ProductScreen = ({ match, history }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <React.Fragment>
+          <MetaHelmet title={product.name} />
           <Row>
             <Col md={6}>
               <Image fluid src={product.image} alt={product.name} />

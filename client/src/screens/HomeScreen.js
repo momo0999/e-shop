@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Button, Card, Carousel, Col, Container, Row } from 'react-bootstrap';
+import { Carousel, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTopProducts } from '../actions/productActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import MetaHelmet from '../components/MetaHelmet';
 import Product from '../components/Product';
 import { images } from '../homeScreenImages';
 
@@ -19,6 +20,7 @@ const HomeScreen = () => {
   }, [dispatch]);
   return (
     <React.Fragment>
+      <MetaHelmet />
       <Carousel className='carousel__homeScreen'>
         {images.map((image, index) => {
           return (
