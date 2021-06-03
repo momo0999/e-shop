@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchProductsList } from '../actions/productActions';
 import { Col, Row } from 'react-bootstrap';
 
@@ -8,6 +9,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
+import MetaHelmet from '../components/MetaHelmet';
 
 const ShopScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -23,8 +25,15 @@ const ShopScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
   return (
     <React.Fragment>
-      {!keyword && <ProductCarousel />}
+      <MetaHelmet />
       <h1>LATEST PRODUCTS</h1>
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link className='btn btn-light' to='/shop'>
+          Go Back
+        </Link>
+      )}
       {loading ? (
         <Loader />
       ) : error ? (
