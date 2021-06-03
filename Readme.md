@@ -1,4 +1,4 @@
-# Blog and photo gallery
+# MugShop e-commerce
 
 > This is a [MugShop e-commerce](https://mernstack-mugshop.herokuapp.com/ 'blog and photo gallery app') build with the MERN stack & Redux.
 
@@ -11,6 +11,7 @@
 - Product search feature.
 - Top products carousel.
 - Product pagination.
+- Product review and ratings.
 - User profile and orders.
 - Admin product and user managment.
 - Order details page.
@@ -29,6 +30,10 @@
 Create your .env file in the root of the repo, make use of the variables in the .env.example file.
 
 ###
+
+## Testing checkout process:
+
+- You can use your own [paypal sandbox account ](https://developer.paypal.com/developer/accounts/) if you want to test the checkout process.
 
 ## Install Dependencies (backend & client)
 
@@ -70,7 +75,3 @@ npm install
    admin@example.com(com) (Admin)
    123456
    ```
-
-   ## Testing checkout process:
-
-   - You can use your own [paypal sandbox account ](https://developer.paypal.com/developer/accounts/) if you want to test the checkout process.
