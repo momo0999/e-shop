@@ -51,6 +51,7 @@ export const loginUser = (formValues) => async (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('userInfo');
+  localStorage.removeItem('cartItems');
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: USER_LIST_RESET });

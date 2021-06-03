@@ -99,6 +99,7 @@ export const payOrder =
         payload: data,
       });
       dispatch({ type: CART_RESET });
+      localStorage.removeItem('cartItems');
     } catch (error) {
       dispatch({
         type: ORDER_PAY_FAIL,
