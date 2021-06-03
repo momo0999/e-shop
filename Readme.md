@@ -1,6 +1,6 @@
 # Blog and photo gallery
 
-> This is a [MugShop e-commerce](https://mernstack-blog.herokuapp.com/ 'blog and photo gallery app') build with the MERN stack & Redux.
+> This is a [MugShop e-commerce](https://mernstack-mugshop.herokuapp.com/ 'blog and photo gallery app') build with the MERN stack & Redux.
 
 ![MugShop e-commerce](./uploads/MugShop-project.png)
 
