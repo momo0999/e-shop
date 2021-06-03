@@ -24,6 +24,7 @@ import {
   USER_UPDATE_FAIL,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
+  CART_RESET,
 } from './types';
 
 export const loginUser = (formValues) => async (dispatch) => {
@@ -50,9 +51,11 @@ export const loginUser = (formValues) => async (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('userInfo');
+  localStorage.removeItem('cartItems');
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: USER_LIST_RESET });
+  dispatch({ type: CART_RESET });
 };
 
 export const register = (formValues) => async (dispatch) => {
